@@ -3,28 +3,9 @@
 
 void Comm::begin(long baud_rate) {
   Serial2.begin(baud_rate);
-  Serial1.begin(9600);
-  pinMode(COMMS_RESET_PIN, OUTPUT);
-  digitalWrite(COMMS_RESET_PIN, HIGH);
   failures = 0;
   resetStart = 0;
   bufferIndex = 0;
-}
-
-void Comm::checkReset(){
-  if(millis()-resetStart > 500 && resetStart != 0){
-    Serial1.println("Reset");
-    digitalWrite(COMMS_RESET_PIN, HIGH);
-    resetStart = 0;
-  }else if(Serial1.available()){
-    char cmd = Serial1.read();
-    if(cmd == '1'){
-      Serial1.println("Received");
-      digitalWrite(COMMS_RESET_PIN, LOW);
-      resetStart = millis();
-      failures = 100;
-    }
-  }
 }
 
 bool Comm::read(){
@@ -56,9 +37,9 @@ bool Comm::read(){
       for(int j=i; j<READ_LEN; j++){
         read_buf[j-i] = read_buf[j];
       }
-      if(Serial.available() >= i){
+      if(Serial2.available() >= i){
         // rest of message available
-        if(Serial.readBytes(&read_buf[READ_LEN-i], i) < i){
+        if(Serial2.readBytes(&read_buf[READ_LEN-i], i) < i){
           //Serial.println("didn't read rest of READ_LEN");
           failures++;
           return false;
@@ -78,15 +59,11 @@ bool Comm::read(){
   _out_struct->driveBL   = read_buf[2];
   _out_struct->driveFR   = read_buf[3];
   _out_struct->driveBR   = read_buf[4];
-  _out_struct->omni      = read_buf[5];
+  _out_struct->waist     = read_buf[5];
   _out_struct->shoulder  = read_buf[6];
-  _out_struct->wrist     = read_buf[7];
-  _out_struct->keyGrabber= read_buf[8];
-  _out_struct->intake    = read_buf[9];
-  _out_struct->score     = read_buf[10];
-  _out_struct->doorOut   = read_buf[11];
-  _out_struct->doorUp    = read_buf[12];
-  _out_struct->compressor= read_buf[13];
+  _out_struct->elbow     = read_buf[7];
+  _out_struct->wrist     = read_buf[8];
+  _out_struct->vacuum    = read_buf[9];
   
   failures = 0;
   return true;
@@ -99,44 +76,16 @@ void Comm::write(){
       char t = Serial2.read();
     }
   }
-  Serial2.write(outBuf, 26);
-}
-
-int Comm::write(unsigned char * msg, int len) {
-  return Serial2.write(msg, len);
-}
-
-int Comm::read(unsigned char * buf, int bufsize) {
-  int bytes_avail = Serial2.available();
-  if(bytes_avail < 4){
-    failures++;
-    return false;
-  }
-  Serial2.readBytes(read_buf, bytes_avail);
-  for (int i = bytes_avail - 1; i >= 3; i --) {
-    if (buf[i] == 0xdd) {
-      unsigned char len = read_buf[i - 1];
-      if ((len + 3) <= i && read_buf[i - len - 3] == 0xff && read_buf[ - 2] == _crc8(&read_buf[i - len - 2], len)) {
-        memcpy(buf, read_buf, bufsize > 128 ? 128 : bufsize);
-        return bufsize > 128 ? 128 : bufsize;
-      }
-    }
-  }
-  return -1;
+  Serial2.write(outBuf, 8);
 }
 
 void Comm::setOutBuf(){
   outBuf[0] = 0xdd;
-  float *tmp = (float *)(outBuf + 1);
-  *tmp = _in_struct->gyroAngle;
-  *(tmp+1) = _in_struct->sonicDistanceF;
-  *(tmp+2) = _in_struct->sonicDistanceL;
-  *(tmp+3) = _in_struct->sonicDistanceR;
-  *(tmp+4) = _in_struct->sonicDistanceB;
-  uint16_t *tmp2 = (uint16_t *)(outBuf + 21);
-  *tmp2 = _in_struct->shoulder;
-  *(tmp2+1) = _in_struct->wrist;
-  outBuf[25] = _crc8(&outBuf[1], 24);
+  uint16_t *tmp = (uint16_t *)(outBuf + 1);
+  *tmp = _in_struct->waist;
+  *(tmp+1) = _in_struct->shoulder;
+  *(tmp+2) = _in_struct->elbow;
+  outBuf[7] = _crc8(&outBuf[1], 6);
 }
 
 Comm::~Comm() {

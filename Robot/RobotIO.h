@@ -1,59 +1,40 @@
 #pragma once
 #include <stdint.h>
 
-struct RobotIn {
-	float gyroAngle;
-  float sonicDistanceF;
-  float sonicDistanceL;
-  float sonicDistanceR;
-  float sonicDistanceB;
-
+struct RobotIn{
+  uint16_t waist;
   uint16_t shoulder;
-  uint16_t wrist;
+  uint16_t elbow;
 
-	RobotIn() :
-		gyroAngle(0.0f),
-    sonicDistanceF(0.0f),
-    sonicDistanceL(0.0f),
-    sonicDistanceR(0.0f),
-    sonicDistanceB(0.0f),
+  RobotIn() :
+    waist(0),
     shoulder(0),
-    wrist(0)
-	{}
+    elbow(0)
+  {}
 };
 
-struct RobotOut {
-	uint8_t driveFL;
-	uint8_t driveBL;
-	uint8_t driveFR;
-	uint8_t driveBR;
-	bool omni;
+struct RobotOut{
+  uint8_t driveFL;
+  uint8_t driveBL;
+  uint8_t driveFR;
+  uint8_t driveBR;
 
+  uint8_t waist;
   uint8_t shoulder;
+  uint8_t elbow;
   uint8_t wrist;
-  bool keyGrabber;
+  bool vacuum;
 
-  uint8_t intake;
-  bool score;
-  bool doorOut;
-  bool doorUp;
-
-  bool compressor;
-
-	RobotOut() :
-		driveFL(90),
-		driveBL(90),
-		driveFR(90),
-		driveBR(90),
-		omni(true),
+  RobotOut() :
+    driveFL(90),
+    driveBL(90),
+    driveFR(90),
+    driveBR(90),
+    waist(90),
     shoulder(90),
+    elbow(90),
     wrist(90),
-    keyGrabber(true),
-    intake(90),
-    score(true),
-    doorOut(true),
-    doorUp(true),
-    compressor(true)
-	{}
+    vacuum(false)
+  {}
 };
 

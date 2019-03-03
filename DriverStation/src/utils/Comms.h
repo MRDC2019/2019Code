@@ -1,6 +1,6 @@
 #pragma once
 
-#define BAUD_RATE	9600
+#define BAUD_RATE	19200
 #define TIMEOUT		500
 #define BUF_SIZE    2048
 
@@ -20,9 +20,6 @@ public:
     bool read();
     bool write();
 
-    int read(unsigned char * buf, int bufsize);
-    int write(unsigned char * buf, int len);
-
     void begin();
     void end();
 
@@ -39,7 +36,7 @@ private:
     RobotIn in;
     CRC8 crc8;
 
-	unsigned char outBuf[15];
+	unsigned char outBuf[11];
 	uint8_t readBuf[BUF_SIZE];
 	size_t bufferIndex;
 	void setOutBuf();

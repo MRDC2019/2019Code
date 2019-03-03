@@ -29,12 +29,6 @@
     <ClCompile Include="..\src\utils\crc8.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\robot\Ball.cpp">
-      <Filter>robot</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\robot\Key.cpp">
-      <Filter>robot</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\utils\PID.cpp">
       <Filter>utils</Filter>
     </ClCompile>
@@ -78,12 +72,6 @@
     </ClInclude>
     <ClInclude Include="..\src\utils\crc8.h">
       <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\robot\Ball.h">
-      <Filter>robot</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\robot\Key.h">
-      <Filter>robot</Filter>
     </ClInclude>
     <ClInclude Include="..\src\utils\PID.h">
       <Filter>utils</Filter>

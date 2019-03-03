@@ -37,19 +37,8 @@
 #define GET_LT(IN)		        (RAW_AXIS(IN, TG) > TG_DB)
 
 // Controls
-#define CTRL_TRANS_X            ( DB_AXIS(JOY0, LX))
-#define CTRL_TRANS_Y            (-DB_AXIS(JOY0, LY))
-#define CTRL_ROT                ( DB_AXIS(JOY0, RX))
 #define CTRL_TANK_LEFT          (-DB_AXIS(JOY0, LY))
 #define CTRL_TANK_RIGHT         (-DB_AXIS(JOY0, RY))
-
-#define CTRL_GYRO_RESET         (false)//GET_BUTTON(JOY0, A_BUT))
-#define CTRL_GYRO_ROT_CCW       (GET_BUTTON(JOY0, LB))
-#define CTRL_GYRO_ROT_CW        (GET_BUTTON(JOY0, RB))
-#define CTRL_TOGGLE_MODE        (GET_BUTTON(JOY0, START))
-#define CTRL_AUTO_MODE			(false)//GET_BUTTON(JOY0, B_BUT))
-#define CTRL_COMP_ON	        (GET_BUTTON(JOY0, A_BUT))
-#define CTRL_COMP_OFF			(GET_BUTTON(JOY0, B_BUT))
 
 #define CTRL_GRAB_KEY           (GET_BUTTON(JOY1, LB))
 #define CTRL_MAN_SHOULDER       (-DB_AXIS(JOY1, RY))

@@ -2,23 +2,14 @@
 #include <cstdint>
 
 struct RobotIn{
-	float gyroAngle;
-	float sonicDistanceF;
-	float sonicDistanceL;
-	float sonicDistanceR;
-	float sonicDistanceB;
-
+	uint16_t waist;
 	uint16_t shoulder;
-	uint16_t wrist;
+	uint16_t elbow;
 
 	RobotIn() :
-		gyroAngle(0.0f),
-		sonicDistanceF(0),
-		sonicDistanceL(0),
-		sonicDistanceR(0),
-		sonicDistanceB(0),
+		waist(0),
 		shoulder(0),
-		wrist(0)
+		elbow(0)
 	{}
 };
 
@@ -27,33 +18,23 @@ struct RobotOut{
 	uint8_t driveBL;
 	uint8_t driveFR;
 	uint8_t driveBR;
-	bool omni;
 
+	uint8_t waist;
 	uint8_t shoulder;
+	uint8_t elbow;
 	uint8_t wrist;
-	bool keyGrabber;
-
-	uint8_t intake;
-	bool score;
-	bool doorOut;
-	bool doorUp;
-
-	bool compressor;
+	bool vacuum;
 
 	RobotOut() :
 		driveFL(90),
 		driveBL(90),
 		driveFR(90),
 		driveBR(90),
-		omni(true),
+		waist(90),
 		shoulder(90),
+		elbow(90),
 		wrist(90),
-		keyGrabber(true),
-		intake(90),
-		score(true),
-		doorOut(true),
-		doorUp(true),
-		compressor(true)
+		vacuum(false)
 	{}
 };
 

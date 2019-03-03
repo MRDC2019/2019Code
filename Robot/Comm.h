@@ -6,21 +6,12 @@
 #include "RobotIO.h"
 #include "Config.h"
 
-/**
- * The packet format:
- * -- To PC:              Data
- *          |0xff|    |    |    |    |CRC |0xee|0xdd|
- * -- From PC:
- *          |0xff| FL | BL | FR | BR   |omni|CRC |0xdd|
- * -- Any length:
- *          |0xff| --- data --- |CRC |len |0xdd|
- */
 class Comm {
 private:
   RobotIn *_in_struct;
   RobotOut *_out_struct;
   unsigned char read_buf[128];
-  unsigned char outBuf[26];
+  unsigned char outBuf[8];
   int bufferIndex;
   long failures;
   long resetStart;
@@ -31,16 +22,12 @@ public:
   // time out is measured in frames
   void begin(long baud_rate);
 
-  void checkReset();
   /**
    * Basically, write out to PC through serial,
    * and read from serial, update the internal servo values.
    */
   void write();
   bool read();
-
-  int write(unsigned char * msg, int len);
-  int read(unsigned char * buf, int bufsize);
   
   void setOutBuf();
   long getFailures() { return failures; }
