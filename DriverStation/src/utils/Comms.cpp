@@ -91,6 +91,7 @@ bool Comms::read(){
 	// set RobotIn vars
 	uint16_t* temp = (uint16_t*)&readBuf[1];
 	in.waist = *temp;
+	printf("FL = %d\n", in.waist);
 	in.shoulder = *(temp + 1);
 	in.elbow = *(temp + 2);
 	//if (pot < 1024)
