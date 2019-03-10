@@ -20,6 +20,13 @@ double PID::compute(double curValue){
 	double dt = double(time - lastTime) / CLOCKS_PER_SEC;
 	double error = target - curValue;
 
+	// if we jumped over the zero
+	if(error > M_PI) {
+		error -= 2*M_PI;
+	} else if(error < -M_PI){
+		error += 2*M_PI;
+	}
+
 	double pOut = error * kp;
 	double iOut = ((error + lastError) / 2.0) * dt * ki;
 	double dOut = (error - lastError) / dt * kd;

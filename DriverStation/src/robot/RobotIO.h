@@ -23,18 +23,18 @@ struct RobotOut{
 	uint8_t shoulder;
 	uint8_t elbow;
 	uint8_t wrist;
-	bool vacuum;
+	uint8_t vacuum;
 
 	RobotOut() :
-		driveFL(90),
-		driveBL(90),
-		driveFR(90),
-		driveBR(90),
-		waist(90),
-		shoulder(90),
-		elbow(90),
-		wrist(90),
-		vacuum(false)
+		driveFL(127),
+		driveBL(127),
+		driveFR(127),
+		driveBR(127),
+		waist(127),
+		shoulder(127),
+		elbow(127),
+		wrist(127),
+		vacuum(127)
 	{}
 };
 

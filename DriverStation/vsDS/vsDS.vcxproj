@@ -86,6 +86,7 @@
     <ClCompile Include="..\src\gui\gui.cpp" />
     <ClCompile Include="..\src\gui\joyPanel.cpp" />
     <ClCompile Include="..\src\gui\textOut.cpp" />
+    <ClCompile Include="..\src\robot\Arm.cpp" />
     <ClCompile Include="..\src\robot\Drive.cpp" />
     <ClCompile Include="..\src\robot\Robot.cpp" />
     <ClCompile Include="..\src\utils\Comms.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="..\src\gui\gui.h" />
     <ClInclude Include="..\src\gui\joyPanel.h" />
     <ClInclude Include="..\src\gui\textOut.h" />
+    <ClInclude Include="..\src\robot\Arm.h" />
     <ClInclude Include="..\src\robot\Constants.h" />
     <ClInclude Include="..\src\robot\Controls.h" />
     <ClInclude Include="..\src\robot\Drive.h" />

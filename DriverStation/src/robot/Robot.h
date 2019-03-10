@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Drive.h"
+#include "Arm.h"
 #include "RobotIO.h"
 #include "Constants.h"
 
@@ -11,4 +12,5 @@ public:
 
 private:
 	Drive drive;
+	Arm arm;
 };

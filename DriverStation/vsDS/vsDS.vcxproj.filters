@@ -32,6 +32,9 @@
     <ClCompile Include="..\src\utils\PID.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\robot\Arm.cpp">
+      <Filter>robot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\gui\textOut.h">
@@ -75,6 +78,9 @@
     </ClInclude>
     <ClInclude Include="..\src\utils\PID.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\robot\Arm.h">
+      <Filter>robot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

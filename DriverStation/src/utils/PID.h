@@ -3,6 +3,7 @@
 #include <cmath>
 #include <cfloat>
 #include <ctime>
+#define M_PI 3.14159265
 
 class PID {
 public:

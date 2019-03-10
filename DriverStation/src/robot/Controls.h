@@ -36,17 +36,19 @@
 #define GET_RT(IN)		        (RAW_AXIS(IN, TG) < -TG_DB)
 #define GET_LT(IN)		        (RAW_AXIS(IN, TG) > TG_DB)
 
+#define JOY_DISCONNECTED(IN)	(!sf::Joystick::isConnected(IN))
+
 // Controls
 #define CTRL_TANK_LEFT          (-DB_AXIS(JOY0, LY))
 #define CTRL_TANK_RIGHT         (-DB_AXIS(JOY0, RY))
+#define CTRL_FULL_PWR           (GET_BUTTON(JOY0, LB))
 
-#define CTRL_GRAB_KEY           (GET_BUTTON(JOY1, LB))
-#define CTRL_MAN_SHOULDER       (-DB_AXIS(JOY1, RY))
-#define CTRL_MAN_WRIST          (-DB_AXIS(JOY1, LY))
-#define CTRL_STOP_HOLD          (GET_LT(JOY1))
+#define CTRL_ARM_X              (-DB_AXIS(JOY1, RY))
+#define CTRL_ARM_Y              (-DB_AXIS(JOY1, RX))
+#define CTRL_ARM_Z              (-DB_AXIS(JOY1, LY))
 
-#define CTRL_INTAKE             (GET_BUTTON(JOY1, Y_BUT))
-#define CTRL_INTAKE_REV         (GET_BUTTON(JOY1, RB))
-#define CTRL_DOOR_OUT           (GET_BUTTON(JOY1, B_BUT))
-#define CTRL_DOOR_UP            (GET_BUTTON(JOY1, A_BUT))
-#define CTRL_SCORE              (GET_BUTTON(JOY1, X_BUT))
+#define CTRL_VACUUM             (GET_BUTTON(JOY1, A_BUT))
+#define CTRL_MANUAL             (GET_BUTTON(JOY1, B_BUT))
+
+#define CTRL_VACUUM2_FWD        (GET_BUTTON(JOY0, RB))
+#define CTRL_VACUUM2_BWD        (GET_BUTTON(JOY1, RB))

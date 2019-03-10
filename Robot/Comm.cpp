@@ -2,19 +2,19 @@
 #include <util/crc16.h>
 
 void Comm::begin(long baud_rate) {
-  Serial.begin(baud_rate);
+  Serial1.begin(baud_rate);
   failures = 0;
   resetStart = 0;
   bufferIndex = 0;
 }
 
 bool Comm::read(){
-  if (Serial.available() < READ_LEN-bufferIndex){
+  if (Serial1.available() < READ_LEN-bufferIndex){
     failures++;
     return false;
   }
   
-  if(Serial.readBytes(read_buf + bufferIndex, READ_LEN-bufferIndex) < READ_LEN-bufferIndex){
+  if(Serial1.readBytes(read_buf + bufferIndex, READ_LEN-bufferIndex) < READ_LEN-bufferIndex){
     bufferIndex = 0;
     failures++;
     return false;
@@ -36,9 +36,9 @@ bool Comm::read(){
       for(int j=i; j<READ_LEN; j++){
         read_buf[j-i] = read_buf[j];
       }
-      if(Serial.available() >= i){
+      if(Serial1.available() >= i){
         // rest of message available
-        if(Serial.readBytes(&read_buf[READ_LEN-i], i) < i){
+        if(Serial1.readBytes(&read_buf[READ_LEN-i], i) < i){
           //Serial.println("didn't read rest of READ_LEN");
           failures++;
           return false;
@@ -71,11 +71,11 @@ bool Comm::read(){
 void Comm::write(){
   setOutBuf();
   if(failures == 0){
-    while(Serial.available() > 0) {
-      char t = Serial.read();
+    while(Serial1.available() > 0) {
+      char t = Serial1.read();
     }
   }
-  Serial.write(outBuf, 8);
+  Serial1.write(outBuf, 8);
 }
 
 void Comm::setOutBuf(){
